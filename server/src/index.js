@@ -1,6 +1,7 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const { mongoose } = require("mongoose");
+const dotenv = require("dotenv").config();
 
 mongoose
    .connect(process.env.MONGO_URL)
