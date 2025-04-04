@@ -1,0 +1,22 @@
+nav {
+   display: flex;
+   background-color: rgb(241, 220, 193);
+   justify-content: space-between;
+   padding: 0 250px 0 250px;
+}
+
+.centered {
+   display: flex;
+   height: 90px;
+   gap: 50px;
+   align-items: center;
+   margin: auto;
+}
+
+a {
+   font-size: 1.4rem;
+   text-decoration: none;
+   color: black;
+   display: flex;
+   padding: 0px 10px;
+}
