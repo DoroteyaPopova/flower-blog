@@ -1,0 +1,27 @@
+.logout {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   width: 450px;
+   padding: 50px;
+   margin: 0 auto;
+   margin-top: 100px;
+   gap: 70px;
+   border-radius: 25px;
+   box-shadow: rgba(100, 78, 45, 0.25) 0px 50px 100px -20px,
+      rgba(59, 39, 9, 0.3) 0px 30px 60px -30px,
+      rgba(121, 72, 9, 0.35) 0px -2px 6px 0px inset;
+}
+
+.logout button {
+   font-size: 1.1rem;
+   max-width: 200px;
+}
+
+.logout p {
+   font-size: 2rem;
+   font-weight: 1000;
+   color: #312210;
+   display: flex;
+   text-align: center;
+}
