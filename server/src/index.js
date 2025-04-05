@@ -15,6 +15,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use("/rtp/users", require("./routes/authRoutes"));
+app.use("/rtp/flowers", require("./routes/flowersRoutes"));
+app.use("/rtp/likes", require("./routes/likesRoutes"));
 
 const port = 8000;
 app.listen(port, () => console.log(`Server is running on port ${port}`));
