@@ -1,0 +1,26 @@
+.eimg {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+}
+
+.container {
+   height: 1000px;
+   position: relative;
+   text-align: center;
+}
+
+.ep {
+   position: absolute;
+   top: 90%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   font-size: 2rem;
+}
+
+.es {
+   font-size: 2rem;
+   color: rgb(160, 93, 6);
+   text-decoration: underline;
+   cursor: pointer;
+}
