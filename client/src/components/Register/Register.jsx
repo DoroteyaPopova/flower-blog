@@ -3,9 +3,11 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "./../../context/userContext";
 
 export default function Register() {
    const navigate = useNavigate();
+   const { login } = useAuth();
    const [data, setData] = useState({
       email: "",
       username: "",
@@ -31,6 +33,7 @@ export default function Register() {
          } else {
             setData({});
             toast.success(responseData.message);
+            login(responseData.user, responseData.token);
             navigate("/");
          }
       } catch (error) {
@@ -52,7 +55,7 @@ export default function Register() {
                      id="email"
                      name="email"
                      placeholder="Email"
-                     value={data.email}
+                     value={data?.email || ""}
                      onChange={(e) =>
                         setData({ ...data, email: e.target.value })
                      }
@@ -66,7 +69,7 @@ export default function Register() {
                      id="username"
                      name="username"
                      placeholder="Username"
-                     value={data.username}
+                     value={data?.username || ""}
                      onChange={(e) =>
                         setData({ ...data, username: e.target.value })
                      }
@@ -80,7 +83,7 @@ export default function Register() {
                      id="password"
                      name="password"
                      placeholder="Password"
-                     value={data.password}
+                     value={data?.password || ""}
                      onChange={(e) =>
                         setData({ ...data, password: e.target.value })
                      }
