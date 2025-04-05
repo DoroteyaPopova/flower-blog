@@ -3,9 +3,11 @@ import styles from "./Login.module.css";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "./../../context/userContext";
 
 export default function Login() {
    const navigate = useNavigate();
+   const { login } = useAuth();
    const [data, setData] = useState({
       email: "",
       password: "",
@@ -24,6 +26,7 @@ export default function Login() {
          } else {
             setData({});
             toast.success(responseData.message);
+            login(responseData.user, responseData.token);
             navigate("/");
          }
       } catch (error) {
