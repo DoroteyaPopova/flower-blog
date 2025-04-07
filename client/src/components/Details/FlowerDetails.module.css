@@ -1,0 +1,91 @@
+.container {
+   display: flex;
+   width: 900px;
+   padding: 50px;
+   margin: 0 auto;
+   margin-top: 100px;
+   justify-content: space-evenly;
+   align-items: center;
+   gap: 150px;
+   border-radius: 25px;
+   box-shadow: rgba(100, 78, 45, 0.25) 0px 50px 100px -20px,
+      rgba(59, 39, 9, 0.3) 0px 30px 60px -30px,
+      rgba(121, 72, 9, 0.35) 0px -2px 6px 0px inset;
+}
+
+.dimg {
+   width: 300px;
+   max-height: 300px;
+}
+
+.details {
+   min-height: 300px;
+   min-width: 300px;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   gap: 20px;
+}
+
+.details p {
+   font-size: 22px;
+   color: #42301c;
+   font-family: "Times New Roman", Times, serif;
+}
+
+.buttons {
+   display: flex;
+   gap: 20px;
+}
+
+.buttons button {
+   font-size: 1.1rem;
+}
+
+.edit {
+   display: flex;
+   width: 500px;
+   padding: 50px;
+   margin: 0 auto;
+   margin-top: 100px;
+   justify-content: space-evenly;
+   flex-direction: column;
+   align-items: center;
+   gap: 20px;
+   border-radius: 25px;
+   box-shadow: rgba(100, 78, 45, 0.25) 0px 50px 100px -20px,
+      rgba(59, 39, 9, 0.3) 0px 30px 60px -30px,
+      rgba(121, 72, 9, 0.35) 0px -2px 6px 0px inset;
+}
+
+.edit .buttons {
+   width: 270px;
+}
+
+.inputsEdit {
+   display: flex;
+   flex-direction: column;
+   padding: 10px;
+   width: 300px;
+   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+   border: none;
+   color: #42301c;
+   font-size: 1.2rem;
+   outline: none;
+}
+
+.likeButton {
+   color: #fff;
+   background-color: #d1b289;
+}
+
+.likedButton {
+   color: #fff;
+   background-color: #d1b289;
+}
+
+.likeCount {
+   font-size: 0.9rem;
+   color: #6c757d;
+   margin-top: 10px;
+}
