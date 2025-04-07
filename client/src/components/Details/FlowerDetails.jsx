@@ -20,6 +20,11 @@ export default function FlowerDetails() {
          try {
             const response = await axios.get(`/rtp/flowers/${id}`);
             setFlower(response.data);
+
+            const likesCountRes = await axios.get(
+               `/rtp/likes/count/flower/${id}`
+            );
+            setLikeCount(likesCountRes.data.count);
             if (user && response.data) {
                setIsOwnerOfFlower(response.data.owner === user.id);
             }
@@ -40,11 +45,6 @@ export default function FlowerDetails() {
                   `/rtp/likes/check/${user.id}/${id}`
                );
                setIsLiked(likeStatusRes.data.liked);
-
-               const likesCountRes = await axios.get(
-                  `/rtp/likes/count/flower/${id}`
-               );
-               setLikeCount(likesCountRes.data.count);
             } catch (error) {
                console.error("Error fetching like information:", error);
             }
