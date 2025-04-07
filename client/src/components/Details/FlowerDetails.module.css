@@ -18,6 +18,12 @@
    max-height: 300px;
 }
 
+.inBold {
+   font-size: 22px;
+   font-weight: bold;
+   color: #583c1c;
+}
+
 .details {
    min-height: 300px;
    min-width: 300px;
