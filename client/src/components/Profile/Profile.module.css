@@ -1,36 +1,236 @@
+.pageLayout {
+   display: flex;
+   max-width: 1200px;
+   margin: 0 auto;
+   padding: 40px 20px;
+   gap: 40px;
+}
+
 .profileContainer {
    background-color: #f5e1c0;
-   padding: 20px;
+   padding: 30px;
    border-radius: 10px;
-   width: 300px;
-   margin: 0 auto;
+   width: 400px;
+   max-height: 400px;
+   flex-shrink: 0;
    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-   margin-top: 150px;
    display: flex;
    flex-direction: column;
 }
 
 .profileContainer h2 {
-   margin-bottom: 20px;
+   margin-bottom: 30px;
+   text-align: center;
+   color: #4a3100;
+   border-bottom: 2px solid #e2c28c;
+   padding-bottom: 15px;
 }
 
 .profileItem {
-   margin-bottom: 15px;
+   margin-bottom: 20px;
 }
 
 .profileItem label {
    display: block;
-   margin-bottom: 5px;
+   margin-bottom: 8px;
    font-weight: bold;
    color: #312210;
 }
 
 .profileItem input {
    width: 100%;
-   padding: 10px;
-   margin: 10px 0;
-   border: 1px solid #ccc;
+   padding: 12px;
+   margin: 5px 0;
    border-radius: 5px;
    box-sizing: border-box;
    outline: none;
+   color: #271a00;
+   font-weight: 600;
+   font-size: 15px;
+   border: 2px solid #e2c28c;
+   background-color: transparent;
+}
+
+.profileItem input:focus {
+   border-color: #b0883c;
+   box-shadow: 0 0 5px rgba(176, 136, 60, 0.5);
+}
+
+.profileItem input:disabled {
+   border: none;
+   font-size: 15px;
+   font-weight: 600;
+   color: #4a3100;
+   cursor: default;
+}
+
+.editButton,
+.saveButton,
+.cancelButton,
+.createFlowerButton {
+   padding: 12px 20px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   font-weight: bold;
+   transition: all 0.3s ease;
+   margin-top: 10px;
+}
+
+.editButton {
+   background-color: #b0883c;
+   color: white;
+   width: 100%;
+}
+
+.editButton:hover {
+   background-color: #8e6d30;
+}
+
+.buttonGroup {
+   display: flex;
+   justify-content: space-between;
+   gap: 15px;
+}
+
+.saveButton {
+   background-color: #7d8510;
+   color: white;
+   flex: 1;
+}
+
+.saveButton:hover {
+   background-color: #606609;
+}
+
+.cancelButton {
+   background-color: #b15517;
+   color: white;
+   flex: 1;
+}
+
+.cancelButton:hover {
+   background-color: #964713;
+}
+
+.flowersContainer {
+   flex: 1;
+   background-color: #fff;
+   border-radius: 10px;
+   padding: 30px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.flowersContainer h2 {
+   color: #4a3100;
+   margin-bottom: 25px;
+   text-align: center;
+   border-bottom: 2px solid #e2c28c;
+   padding-bottom: 15px;
+}
+
+.flowersGrid {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+   gap: 20px;
+}
+
+.flowerCard {
+   background-color: #f9f3e8;
+   border-radius: 8px;
+   overflow: hidden;
+   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+   transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.flowerCard:hover {
+   transform: translateY(-5px);
+   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.flowerImage {
+   height: 160px;
+   background-color: #f5e1c0;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   overflow: hidden;
+}
+
+.flowerImage img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+}
+
+.placeholderImage {
+   font-size: 50px;
+   color: #b0883c;
+}
+
+.flowerInfo {
+   padding: 15px;
+}
+
+.flowerInfo h3 {
+   margin: 0 0 8px 0;
+   color: #4a3100;
+}
+
+.flowerInfo p {
+   margin: 0 0 5px 0;
+   color: #666;
+   font-size: 14px;
+}
+
+.createdDate {
+   font-size: 12px !important;
+   color: #888 !important;
+   margin-top: 10px !important;
+}
+
+.emptyState {
+   text-align: center;
+   padding: 40px 20px;
+   background-color: #f9f3e8;
+   border-radius: 8px;
+}
+
+.emptyState p {
+   margin-bottom: 20px;
+   color: #666;
+}
+
+.createFlowerButton {
+   background-color: #b0883c;
+   color: white;
+   display: inline-block;
+}
+
+.createFlowerButton:hover {
+   background-color: #8e6d30;
+}
+
+.loadingMessage {
+   text-align: center;
+   color: #b0883c;
+   padding: 30px;
+   font-style: italic;
+}
+
+@media (max-width: 900px) {
+   .pageLayout {
+      flex-direction: column;
+      align-items: center;
+   }
+
+   .profileContainer {
+      margin-bottom: 30px;
+      width: 100%;
+      max-width: 500px;
+   }
+
+   .flowersContainer {
+      width: 100%;
+   }
 }
