@@ -160,13 +160,18 @@ export default function FlowerDetails() {
                />
                <div className={styles.details}>
                   <h1>{flower.name}</h1>
-                  <p>Family: {flower.flowerFamilly}</p>
-                  <p>{flower.description}</p>
-
-                  {/* Display like count */}
+                  <p>
+                     <span className={styles.inBold}>Family:</span>{" "}
+                     {flower.flowerFamilly}
+                  </p>
+                  <p>
+                     {" "}
+                     <span className={styles.inBold}>Description:</span>{" "}
+                     {flower.description}
+                  </p>
                   <p className={styles.likeCount}>
-                     {likeCount} {likeCount === 1 ? "person" : "people"} liked
-                     this flower
+                     <span className={styles.inBold}>Likes:</span> {likeCount}{" "}
+                     {likeCount === 1 ? "person" : "people"} liked this flower
                   </p>
 
                   <div className={styles.buttons}>
