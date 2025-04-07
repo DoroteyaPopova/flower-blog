@@ -1,0 +1,68 @@
+.body {
+   display: flex;
+   flex-direction: column;
+   -moz-box-align: center;
+   align-items: center;
+   margin: 0 auto;
+   width: 100%;
+   max-width: 1680px;
+   height: 850px;
+   padding-top: 100px;
+   background-color: rgb(253, 246, 237);
+}
+
+.himg {
+   width: 320px;
+   object-fit: contain;
+   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.container {
+   display: grid;
+   grid-template-columns: repeat(3, minmax(0, 1fr));
+   grid-column-gap: 30px;
+   grid-row-gap: 50px;
+   grid-auto-rows: min-content;
+}
+
+.single {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   width: 410px;
+   align-items: center;
+}
+
+.hspan {
+   color: rgb(85, 79, 79);
+   font-size: 1.1rem;
+   text-underline-offset: 8px;
+   width: 300px;
+}
+
+.hbtn {
+   width: 150px;
+}
+
+.noFlowers {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   position: absolute;
+   right: 27%;
+   top: 10%;
+}
+.hp {
+   position: absolute;
+   top: 90%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   font-size: 2rem;
+   color: rgb(48, 30, 13);
+   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.noImg {
+   width: 150%;
+   object-fit: contain;
+}
