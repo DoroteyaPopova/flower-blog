@@ -1,0 +1,36 @@
+.profileContainer {
+   background-color: #f5e1c0;
+   padding: 20px;
+   border-radius: 10px;
+   width: 300px;
+   margin: 0 auto;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   margin-top: 150px;
+   display: flex;
+   flex-direction: column;
+}
+
+.profileContainer h2 {
+   margin-bottom: 20px;
+}
+
+.profileItem {
+   margin-bottom: 15px;
+}
+
+.profileItem label {
+   display: block;
+   margin-bottom: 5px;
+   font-weight: bold;
+   color: #312210;
+}
+
+.profileItem input {
+   width: 100%;
+   padding: 10px;
+   margin: 10px 0;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   box-sizing: border-box;
+   outline: none;
+}
