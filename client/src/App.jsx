@@ -12,6 +12,9 @@ import Nav from "./components/Navigation/Nav";
 import Logout from "./components/Logout/Logout";
 import Catalog from "./components/Catalog/Catalog";
 import ErrorPage from "./components/ErrorPage/ErrorPage";
+import FlowerDetails from "./components/Details/FlowerDetails";
+import Profile from "./components/Profile/Profile";
+import Upload from "./components/Upload/Upload";
 
 import ProtectedRoute from "./utils/ProtectedRoute";
 
@@ -27,10 +30,13 @@ function App() {
             <Route path="/catalog" element={<Catalog />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/flower/:id" element={<FlowerDetails />} />
             <Route path="*" element={<ErrorPage />} />
 
             <Route element={<ProtectedRoute />}>
+               <Route path="/upload" element={<Upload />} />
                <Route path="/logout" element={<Logout />} />
+               <Route path="/profile" element={<Profile />} />
             </Route>
          </Routes>
          <Toaster position="bottom-right" toastOptions={{ duration: 3000 }} />

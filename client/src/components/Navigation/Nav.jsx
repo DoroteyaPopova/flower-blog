@@ -11,6 +11,8 @@ const Nav = () => {
             <div className={styles.centered}>
                <Link to="/">Home</Link>
                <Link to="/catalog">Catalog</Link>
+               <Link to="/profile">Profile</Link>
+               <Link to="/upload">Upload</Link>
                <Link to="/logout">Logout</Link>
             </div>
          )}
