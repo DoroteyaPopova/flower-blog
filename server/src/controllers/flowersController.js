@@ -86,10 +86,21 @@ const deleteFlower = async (req, res) => {
    }
 };
 
+const getUserFlowers = async (req, res) => {
+   try {
+      const { userId } = req.params;
+      const flowers = await Flower.find({ owner: userId });
+      res.status(200).json(flowers);
+   } catch (error) {
+      res.status(500).json({ message: error.message });
+   }
+};
+
 module.exports = {
    getAllFlowers,
    getSingleFlower,
    addflower,
    updateFlower,
    deleteFlower,
+   getUserFlowers,
 };

@@ -7,6 +7,7 @@ const {
    addflower,
    updateFlower,
    deleteFlower,
+   getUserFlowers,
 } = require("../controllers/flowersController.js");
 
 router.use(
@@ -21,5 +22,6 @@ router.get("/:id", getSingleFlower);
 router.post("/upload", addflower);
 router.put("/:id", updateFlower);
 router.delete("/:id", deleteFlower);
+router.get("/user/:userId", getUserFlowers);
 
 module.exports = router;
