@@ -26,7 +26,11 @@ export default function Catalog() {
                         alt={flower.name}
                      />
                      <h3>{flower.name}</h3>
-                     <span className={styles.hspan}>{flower.description}</span>
+                     <span className={styles.hspan}>
+                        {flower.description.length >= 150
+                           ? flower.description.slice(0, 150) + "..."
+                           : flower.description}
+                     </span>
                      <button
                         className={styles.hbtn}
                         onClick={() => navigate(`/flower/${flower._id}`)}
