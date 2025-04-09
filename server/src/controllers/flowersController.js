@@ -1,4 +1,5 @@
 const Flower = require("../models/flowerModel.js");
+const Likes = require("../models/likesModel.js");
 const jwt = require("jsonwebtoken");
 
 const getAllFlowers = async (req, res) => {
@@ -77,8 +78,9 @@ const deleteFlower = async (req, res) => {
       const flower = await Flower.findByIdAndDelete(id);
 
       if (!flower) {
-         return res.status(404).json({ message: error.message });
+         return res.status(404).json({ message: "Flower not found" });
       }
+      await Likes.deleteMany({ flowerId: id });
 
       res.status(200).json({ message: "Flower deleted succesfully!" });
    } catch (error) {
