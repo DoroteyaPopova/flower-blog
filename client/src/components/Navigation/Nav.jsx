@@ -7,23 +7,23 @@ const Nav = () => {
    const { user } = useContext(UserContext);
    return (
       <nav>
-         {user && (
-            <div className={styles.centered}>
-               <Link to="/">Home</Link>
-               <Link to="/catalog">Catalog</Link>
-               <Link to="/profile">Profile</Link>
-               <Link to="/upload">Upload</Link>
-               <Link to="/logout">Logout</Link>
-            </div>
-         )}
-         {!user && (
-            <div className={styles.centered}>
-               <Link to="/">Home</Link>
-               <Link to="/catalog">Catalog</Link>
-               <Link to="/register">Register</Link>
-               <Link to="/login">Login</Link>
-            </div>
-         )}
+         <div className={styles.centered}>
+            <Link to="/">Home</Link>
+            <Link to="/catalog">Catalog</Link>
+
+            {user ? (
+               <>
+                  <Link to="/profile">Profile</Link>
+                  <Link to="/upload">Upload</Link>
+                  <Link to="/logout">Logout</Link>
+               </>
+            ) : (
+               <>
+                  <Link to="/register">Register</Link>
+                  <Link to="/login">Login</Link>
+               </>
+            )}
+         </div>
       </nav>
    );
 };
