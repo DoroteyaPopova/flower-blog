@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./Profile.module.css";
+import { toast } from "react-hot-toast";
 import { UserContext } from "../../context/userContext";
 import { useNavigate } from "react-router-dom";
 
@@ -59,7 +60,7 @@ export default function Profile() {
    const handleSave = async () => {
       try {
          await axios.post("/rtp/users/update", userDetails);
-         alert("Changes saved successfully!");
+         toast.success("Changes saved successfully!");
          setIsEditing(false);
          setOriginalDetails({ ...userDetails });
       } catch (error) {
