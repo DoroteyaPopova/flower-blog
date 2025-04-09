@@ -2,8 +2,10 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./Profile.module.css";
 import { UserContext } from "../../context/userContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
+   const navigate = useNavigate();
    const { user } = useContext(UserContext);
    const [userDetails, setUserDetails] = useState({
       email: "",
@@ -63,6 +65,10 @@ export default function Profile() {
       } catch (error) {
          console.error("Error saving changes:", error);
       }
+   };
+
+   const handleFlowerClick = (flowerId) => {
+      navigate(`/flower/${flowerId}`);
    };
 
    return (
@@ -127,7 +133,12 @@ export default function Profile() {
             ) : userFlowers.length > 0 ? (
                <div className={styles.flowersGrid}>
                   {userFlowers.map((flower) => (
-                     <div key={flower._id} className={styles.flowerCard}>
+                     <div
+                        key={flower._id}
+                        className={styles.flowerCard}
+                        onClick={() => handleFlowerClick(flower._id)}
+                        style={{ cursor: "pointer" }}
+                     >
                         <div className={styles.flowerImage}>
                            {flower.image ? (
                               <img src={flower.image} alt={flower.name} />
