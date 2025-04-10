@@ -239,6 +239,7 @@
    background-color: #b0883c;
    color: white;
    display: inline-block;
+   width: 300px;
 }
 
 .createFlowerButton:hover,
