@@ -16,9 +16,9 @@ export default function Catalog() {
 
    return (
       <div className={styles.body}>
-         <div className={styles.container}>
-            {flowers.length > 0 ? (
-               flowers.map((flower) => (
+         {flowers.length > 0 ? (
+            <div className={styles.container}>
+               {flowers.map((flower) => (
                   <div className={styles.single} key={flower._id}>
                      <img
                         className={styles.himg}
@@ -38,18 +38,18 @@ export default function Catalog() {
                         Read more
                      </button>
                   </div>
-               ))
-            ) : (
-               <div className={styles.noFlowers}>
-                  <img
-                     className={styles.noImg}
-                     src="/noFlower-noBG.png"
-                     alt="Sorry"
-                  />
-                  <p className={styles.hp}>No flowers available</p>
-               </div>
-            )}
-         </div>
+               ))}
+            </div>
+         ) : (
+            <div className={styles.noFlowers}>
+               <img
+                  className={styles.noImg}
+                  src="/noFlower-noBG.png"
+                  alt="Sorry"
+               />
+               <p className={styles.hp}>No flowers available</p>
+            </div>
+         )}
       </div>
    );
 }
