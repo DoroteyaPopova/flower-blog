@@ -71,8 +71,9 @@
    height: 100%;
    width: 100%;
    max-width: 50vh;
+   max-height: 400px;
    object-fit: contain;
-   bottom: 3%;
+   bottom: 28%;
    position: absolute;
 }
 
