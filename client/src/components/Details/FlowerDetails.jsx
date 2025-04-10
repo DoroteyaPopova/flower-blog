@@ -9,7 +9,6 @@ export default function FlowerDetails() {
    const { id } = useParams();
    const navigate = useNavigate();
    const [flower, setFlower] = useState(null);
-   const [isEditing, setIsEditing] = useState(false);
    const { user, isLoading } = useAuth();
    const [isOwnerOfFlower, setIsOwnerOfFlower] = useState(false);
    const [isLiked, setIsLiked] = useState(false);
@@ -56,17 +55,6 @@ export default function FlowerDetails() {
 
    if (isLoading || !flower) return <p>Loading...</p>;
 
-   const handleSave = async () => {
-      try {
-         await axios.put(`/rtp/flowers/${id}`, flower);
-         setIsEditing(false);
-         toast.success("Flower updated successfully");
-      } catch (error) {
-         console.error("Error updating flower:", error);
-         toast.error("Failed to update flower");
-      }
-   };
-
    const handleDelete = async () => {
       try {
          await axios.delete(`/rtp/flowers/${id}`);
@@ -107,103 +95,53 @@ export default function FlowerDetails() {
       }
    };
 
-   return (
-      <>
-         {isEditing ? (
-            <div className={styles.edit}>
-               <h3>Name</h3>
-               <input
-                  className={styles.inputsEdit}
-                  type="text"
-                  value={flower.name}
-                  onChange={(e) =>
-                     setFlower({ ...flower, name: e.target.value })
-                  }
-               />
-               <h3>Description</h3>
-               <input
-                  className={styles.inputsEdit}
-                  value={flower.description}
-                  onChange={(e) =>
-                     setFlower({ ...flower, description: e.target.value })
-                  }
-               />
-               <h3>Family</h3>
-               <input
-                  className={styles.inputsEdit}
-                  type="text"
-                  value={flower.flowerFamilly}
-                  onChange={(e) =>
-                     setFlower({ ...flower, flowerFamilly: e.target.value })
-                  }
-               />
-               <h3>Flower's Image</h3>
-               <input
-                  className={styles.inputsEdit}
-                  type="text"
-                  value={flower.image}
-                  onChange={(e) =>
-                     setFlower({ ...flower, image: e.target.value })
-                  }
-               />
-               <div className={styles.buttons}>
-                  <button onClick={handleSave}>Save</button>
-                  <button onClick={() => setIsEditing(false)}>Cancel</button>
-               </div>
-            </div>
-         ) : (
-            <div className={styles.container}>
-               <img
-                  className={styles.dimg}
-                  src={flower.image}
-                  alt={flower.name}
-               />
-               <div className={styles.details}>
-                  <h1>{flower.name}</h1>
-                  <p>
-                     <span className={styles.inBold}>Family:</span>{" "}
-                     {flower.flowerFamilly}
-                  </p>
-                  <p>
-                     {" "}
-                     <span className={styles.inBold}>Description:</span>{" "}
-                     {flower.description}
-                  </p>
-                  <p className={styles.likeCount}>
-                     <span className={styles.inBold}>Likes:</span> {likeCount}{" "}
-                     {likeCount === 1 ? "person" : "people"} liked this flower
-                  </p>
+   const handleEditClick = () => {
+      navigate(`/edit/${id}`);
+   };
 
-                  <div className={styles.buttons}>
-                     {isOwnerOfFlower ? (
-                        <>
-                           <button onClick={() => setIsEditing(true)}>
-                              Edit
-                           </button>
-                           <button onClick={handleDelete}>Delete</button>
-                        </>
-                     ) : (
-                        user && (
-                           <button
-                              onClick={handleLikeToggle}
-                              className={
-                                 isLiked
-                                    ? styles.likedButton
-                                    : styles.likeButton
-                              }
-                           >
-                              {isLiked ? "Unlike" : "Like"}
-                              <span role="img" aria-label="heart">
-                                 {" "}
-                                 {isLiked ? "💔" : "❤️"}
-                              </span>
-                           </button>
-                        )
-                     )}
-                  </div>
-               </div>
+   return (
+      <div className={styles.container}>
+         <img className={styles.dimg} src={flower.image} alt={flower.name} />
+         <div className={styles.details}>
+            <h1>{flower.name}</h1>
+            <p>
+               <span className={styles.inBold}>Family:</span>{" "}
+               {flower.flowerFamilly}
+            </p>
+            <p>
+               {" "}
+               <span className={styles.inBold}>Description:</span>{" "}
+               {flower.description}
+            </p>
+            <p className={styles.likeCount}>
+               <span className={styles.inBold}>Likes:</span> {likeCount}{" "}
+               {likeCount === 1 ? "person" : "people"} liked this flower
+            </p>
+
+            <div className={styles.buttons}>
+               {isOwnerOfFlower ? (
+                  <>
+                     <button onClick={handleEditClick}>Edit</button>
+                     <button onClick={handleDelete}>Delete</button>
+                  </>
+               ) : (
+                  user && (
+                     <button
+                        onClick={handleLikeToggle}
+                        className={
+                           isLiked ? styles.likedButton : styles.likeButton
+                        }
+                     >
+                        {isLiked ? "Unlike" : "Like"}
+                        <span role="img" aria-label="heart">
+                           {" "}
+                           {isLiked ? "💔" : "❤️"}
+                        </span>
+                     </button>
+                  )
+               )}
             </div>
-         )}
-      </>
+         </div>
+      </div>
    );
 }
