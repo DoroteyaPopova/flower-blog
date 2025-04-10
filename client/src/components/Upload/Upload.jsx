@@ -12,85 +12,115 @@ export default function Upload() {
       flowerFamilly: "",
       image: "",
    });
+   const [isLoading, setIsLoading] = useState(false);
 
    const upload = async (e) => {
       e.preventDefault();
+      setIsLoading(true);
       const { name, description, flowerFamilly, image } = data;
       try {
-         const { data } = await axios.post("/rtp/flowers/upload", {
+         const { data: response } = await axios.post("/rtp/flowers/upload", {
             name,
             description,
             flowerFamilly,
             image,
          });
-         if (data.error) {
-            toast.error(data.error);
+         if (response.error) {
+            toast.error(response.error);
          } else {
             setData({});
-            toast.success(data.message);
+            toast.success(response.message);
             navigate("/");
          }
       } catch (error) {
          console.log(error.message, "flower upload error");
+         toast.error("Failed to upload flower. Please try again.");
+      } finally {
+         setIsLoading(false);
       }
    };
+
+   const handleCancel = () => {
+      navigate("/");
+   };
+
    return (
-      <div className={styles.container}>
-         <div className={styles.textContainer}>
-            <form action="put" onSubmit={upload} className={styles.form}>
-               <div className={styles.formGroup}>
-                  <input
-                     type="text"
-                     placeholder="Name"
-                     id="name"
-                     value={data?.name || ""}
-                     onChange={(e) =>
-                        setData({ ...data, name: e.target.value })
-                     }
-                  />
-                  <label htmlFor="name">Name</label>
-               </div>
+      <div className={styles.uploadContainer}>
+         <h1>Create Your Flower's Post</h1>
 
-               <div className={styles.formGroup}>
-                  <input
-                     type="text"
-                     placeholder="Description"
-                     id="description"
-                     value={data?.description || ""}
-                     onChange={(e) =>
-                        setData({ ...data, description: e.target.value })
-                     }
-                  />
-                  <label htmlFor="description">Description</label>
-               </div>
+         <form className={styles.uploadForm} onSubmit={upload}>
+            <div className={styles.formGroup}>
+               <label htmlFor="name">Name</label>
+               <input
+                  type="text"
+                  id="name"
+                  value={data.name || ""}
+                  onChange={(e) => setData({ ...data, name: e.target.value })}
+                  required
+               />
+            </div>
 
-               <div className={styles.formGroup}>
-                  <input
-                     type="text"
-                     placeholder="Familly"
-                     id="flowerFamilly"
-                     value={data?.flowerFamilly || ""}
-                     onChange={(e) =>
-                        setData({ ...data, flowerFamilly: e.target.value })
-                     }
-                  />
-                  <label htmlFor="flowerFamilly">Familly</label>
+            <div className={styles.formGroup}>
+               <label htmlFor="description">Description</label>
+               <textarea
+                  id="description"
+                  value={data.description || ""}
+                  onChange={(e) =>
+                     setData({ ...data, description: e.target.value })
+                  }
+                  required
+               />
+            </div>
+
+            <div className={styles.formGroup}>
+               <label htmlFor="flowerFamilly">Family</label>
+               <input
+                  type="text"
+                  id="flowerFamilly"
+                  value={data.flowerFamilly || ""}
+                  onChange={(e) =>
+                     setData({ ...data, flowerFamilly: e.target.value })
+                  }
+                  required
+               />
+            </div>
+
+            <div className={styles.formGroup}>
+               <label htmlFor="image">Image URL</label>
+               <input
+                  type="text"
+                  id="image"
+                  value={data.image || ""}
+                  onChange={(e) => setData({ ...data, image: e.target.value })}
+                  required
+               />
+            </div>
+
+            {data.image && (
+               <div className={styles.imagePreview}>
+                  <h3>Image Preview</h3>
+                  <img src={data.image} alt="Flower preview" />
                </div>
-               <div className={styles.formGroup}>
-                  <input
-                     type="text"
-                     placeholder="Image URL"
-                     id="image"
-                     value={data?.image || ""}
-                     onChange={(e) =>
-                        setData({ ...data, image: e.target.value })
-                     }
-                  />
-                  <label htmlFor="image">Image URL</label>
-               </div>
-               <button type="submit">Upload</button>
-            </form>
-         </div>
+            )}
+
+            <div className={styles.formActions}>
+               <button
+                  type="submit"
+                  className={styles.saveButton}
+                  disabled={isLoading}
+               >
+                  {isLoading ? "Uploading..." : "Upload"}
+               </button>
+               <button
+                  type="button"
+                  className={styles.cancelButton}
+                  onClick={handleCancel}
+                  disabled={isLoading}
+               >
+                  Cancel
+               </button>
+            </div>
+         </form>
       </div>
    );
 }
