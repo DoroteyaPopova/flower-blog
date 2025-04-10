@@ -5,7 +5,7 @@ const User = require("../models/userModel");
 
 const registerUser = async (req, res) => {
    try {
-      const { email, username, password } = req.body;
+      const { email, username, password, repass } = req.body;
       if (!email) {
          return res.json({ error: "Email is required" });
       }
@@ -17,6 +17,9 @@ const registerUser = async (req, res) => {
             error: "Password is required and should be at least 6 characters long!",
          });
       }
+      if (password !== repass) {
+         return res.json({ error: "Passwords do not match" });
+      }
       const exist = await User.findOne({ email });
       if (exist) {
          return res.json({ error: "Email is already taken" });
@@ -26,7 +29,7 @@ const registerUser = async (req, res) => {
       await user.save();
 
       const token = jwt.sign(
-         { userId: user.id, email, username, password },
+         { userId: user.id, email, username },
          process.env.JWT_Secret,
          {
             expiresIn: "1w",
