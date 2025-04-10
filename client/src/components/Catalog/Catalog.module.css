@@ -65,8 +65,9 @@
    height: 100%;
    width: 100%;
    max-width: 150vh;
+   max-height: 400px;
    object-fit: contain;
-   bottom: 10%;
+   bottom: 28%;
    position: absolute;
 }
 
