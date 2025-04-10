@@ -12,11 +12,12 @@ export default function Register() {
       email: "",
       username: "",
       password: "",
+      repass: "",
    });
 
    const handleRegister = async (e) => {
       e.preventDefault();
-      const { email, username, password } = data;
+      const { email, username, password, repass } = data;
 
       try {
          const { data: responseData } = await axios.post(
@@ -25,6 +26,7 @@ export default function Register() {
                email,
                username,
                password,
+               repass,
             }
          );
 
@@ -90,7 +92,23 @@ export default function Register() {
                      required
                      minLength={6}
                   />
-                  <label htmlFor="password">Password</label>
+                  <label htmlFor="repass">Password</label>
+               </div>
+
+               <div className={styles.formGroup}>
+                  <input
+                     type="password"
+                     id="repass"
+                     name="repass"
+                     placeholder="Repeat Password"
+                     value={data?.repass || ""}
+                     onChange={(e) =>
+                        setData({ ...data, repass: e.target.value })
+                     }
+                     required
+                     minLength={6}
+                  />
+                  <label htmlFor="repass">Confirm Password be</label>
                </div>
                <button type="submit">Register</button>
             </form>
