@@ -54,31 +54,35 @@ export default function Home() {
 
    return (
       <div className={styles.body}>
-         <h1 className={styles.homeTitle}>Most Liked Flowers</h1>
          {topFlowers.length > 0 ? (
-            <div className={styles.container}>
-               {topFlowers.map((flower) => (
-                  <div className={styles.single} key={flower._id}>
-                     <img
-                        className={styles.himg}
-                        src={flower?.image}
-                        alt={flower?.name}
-                     />
-                     <h3>{flower?.name}</h3>
-                     <span className={styles.hspan}>
-                        {flower.description.length >= 150
-                           ? flower.description.slice(0, 150) + "..."
-                           : flower.description}
-                     </span>
-                     <button
-                        className={styles.hbtn}
-                        onClick={() => navigate(`/flower/${flower?._id}`)}
-                     >
-                        Read more
-                     </button>
-                  </div>
-               ))}
-            </div>
+            <>
+               <h1 className={styles.homeTitle}>
+                  Top Three Most Liked Flowers
+               </h1>
+               <div className={styles.container}>
+                  {topFlowers.map((flower) => (
+                     <div className={styles.single} key={flower._id}>
+                        <img
+                           className={styles.himg}
+                           src={flower?.image}
+                           alt={flower?.name}
+                        />
+                        <h3>{flower?.name}</h3>
+                        <span className={styles.hspan}>
+                           {flower.description.length >= 150
+                              ? flower.description.slice(0, 150) + "..."
+                              : flower.description}
+                        </span>
+                        <button
+                           className={styles.hbtn}
+                           onClick={() => navigate(`/flower/${flower?._id}`)}
+                        >
+                           Read more
+                        </button>
+                     </div>
+                  ))}
+               </div>
+            </>
          ) : (
             <div className={styles.noFlowers}>
                <img
