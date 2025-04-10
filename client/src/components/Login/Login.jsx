@@ -30,7 +30,9 @@ export default function Login() {
             navigate("/");
          }
       } catch (error) {
-         toast.error("Login failed. Please try again.");
+         toast.error(
+            error.response?.data?.error || "Login failed. Please try again."
+         );
       }
    };
 
@@ -49,6 +51,7 @@ export default function Login() {
                      onChange={(e) =>
                         setData({ ...data, email: e.target.value })
                      }
+                     required
                   />
                   <label htmlFor="email">Email</label>
                </div>
@@ -62,6 +65,7 @@ export default function Login() {
                      onChange={(e) =>
                         setData({ ...data, password: e.target.value })
                      }
+                     required
                   />
                   <label htmlFor="password">Password</label>
                </div>
