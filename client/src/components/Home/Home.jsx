@@ -54,6 +54,7 @@ export default function Home() {
 
    return (
       <div className={styles.body}>
+         <h1 className={styles.homeTitle}>Most Liked Flowers</h1>
          <div className={styles.container}>
             {topFlowers.length > 0 ? (
                topFlowers.map((flower) => (
