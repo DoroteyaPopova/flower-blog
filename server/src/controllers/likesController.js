@@ -85,6 +85,7 @@ exports.getUserLikesCount = async (req, res) => {
 exports.getUserLikes = async (req, res) => {
    try {
       const likes = await Likes.find({ userId: req.params.userId });
+      // const likes = []; //No likes test
       res.status(200).json(likes);
    } catch (error) {
       res.status(400).json({ error: error.message });
