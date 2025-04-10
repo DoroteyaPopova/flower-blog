@@ -17,6 +17,7 @@ import Profile from "./components/Profile/Profile";
 import Upload from "./components/Upload/Upload";
 
 import ProtectedRoute from "./utils/ProtectedRoute";
+import EditFlower from "./components/Flower Edit/EditFlower";
 
 axios.defaults.baseURL = "http://localhost:8000/";
 axios.defaults.withCredentials = true;
@@ -37,6 +38,7 @@ function App() {
                <Route path="/upload" element={<Upload />} />
                <Route path="/logout" element={<Logout />} />
                <Route path="/profile" element={<Profile />} />
+               <Route path="/edit/:id" element={<EditFlower />} />
             </Route>
          </Routes>
          <Toaster position="bottom-right" toastOptions={{ duration: 3000 }} />

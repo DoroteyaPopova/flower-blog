@@ -1,0 +1,132 @@
+.editContainer {
+   max-width: 800px;
+   margin: 40px auto;
+   padding: 30px;
+   background-color: #f5e1c0;
+   border-radius: 10px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.editContainer h1 {
+   color: #4a3100;
+   margin-bottom: 25px;
+   text-align: center;
+   border-bottom: 2px solid #e2c28c;
+   padding-bottom: 15px;
+}
+
+.editForm {
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+}
+
+.formGroup {
+   display: flex;
+   flex-direction: column;
+   gap: 8px;
+}
+
+.formGroup label {
+   font-weight: bold;
+   color: #312210;
+}
+
+.formGroup input,
+.formGroup textarea {
+   padding: 12px;
+   border-radius: 5px;
+   border: 2px solid #e2c28c;
+   background-color: #fff;
+   color: #271a00;
+   font-size: 16px;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+   outline: none;
+   border-color: #b0883c;
+   box-shadow: 0 0 5px rgba(176, 136, 60, 0.5);
+}
+
+.imagePreview {
+   margin-top: 10px;
+   text-align: center;
+}
+
+.imagePreview h3 {
+   color: #4a3100;
+   margin-bottom: 10px;
+}
+
+.imagePreview img {
+   max-width: 100%;
+   max-height: 300px;
+   border-radius: 8px;
+   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.formActions {
+   display: flex;
+   justify-content: space-between;
+   gap: 15px;
+   margin-top: 20px;
+}
+
+.saveButton,
+.cancelButton {
+   flex: 1;
+   padding: 12px 20px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   font-weight: bold;
+   font-size: 16px;
+   transition: all 0.3s ease;
+}
+
+.saveButton {
+   background-color: #7d8510;
+   color: white;
+}
+
+.saveButton:hover:not(:disabled) {
+   background-color: #606609;
+}
+
+.cancelButton {
+   color: white;
+}
+
+.cancelButton:hover:not(:disabled) {
+   background-color: #964713;
+}
+
+.saveButton:disabled,
+.cancelButton:disabled {
+   opacity: 0.6;
+   cursor: not-allowed;
+}
+
+.loading {
+   text-align: center;
+   padding: 40px;
+   color: #b0883c;
+   font-style: italic;
+}
+
+@media (max-width: 600px) {
+   .editContainer {
+      margin: 20px;
+      padding: 20px;
+   }
+
+   .formActions {
+      flex-direction: column;
+   }
+
+   .saveButton,
+   .cancelButton {
+      width: 100%;
+   }
+}
