@@ -55,9 +55,9 @@ export default function Home() {
    return (
       <div className={styles.body}>
          <h1 className={styles.homeTitle}>Most Liked Flowers</h1>
-         <div className={styles.container}>
-            {topFlowers.length > 0 ? (
-               topFlowers.map((flower) => (
+         {topFlowers.length > 0 ? (
+            <div className={styles.container}>
+               {topFlowers.map((flower) => (
                   <div className={styles.single} key={flower._id}>
                      <img
                         className={styles.himg}
@@ -77,18 +77,18 @@ export default function Home() {
                         Read more
                      </button>
                   </div>
-               ))
-            ) : (
-               <div className={styles.noFlowers}>
-                  <img
-                     className={styles.noImg}
-                     src="/noFlower-noBG.png"
-                     alt="Sorry"
-                  />
-                  <p className={styles.hp}>No flowers available</p>
-               </div>
-            )}
-         </div>
+               ))}
+            </div>
+         ) : (
+            <div className={styles.noFlowers}>
+               <img
+                  className={styles.noImg}
+                  src="/noFlower-noBG.png"
+                  alt="Sorry"
+               />
+               <p className={styles.hp}>No flowers available</p>
+            </div>
+         )}
       </div>
    );
 }
