@@ -10,17 +10,14 @@ const {
    updateUser,
 } = require("../controllers/authController");
 
-router.use(
-   cors({
-      credentials: true,
-      origin: "http://localhost:5173",
-   })
-);
-
 router.use(cookieParser());
 
 router.get("/logout", (req, res) => {
-   res.clearCookie("token");
+   res.clearCookie("token", {
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+   });
    res.status(200).json({ message: "Logged out successfully" });
 });
 

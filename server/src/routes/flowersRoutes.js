@@ -10,13 +10,6 @@ const {
    getUserFlowers,
 } = require("../controllers/flowersController.js");
 
-router.use(
-   cors({
-      credentials: true,
-      origin: "http://localhost:5173",
-   })
-);
-
 router.get("/catalog", getAllFlowers);
 router.get("/:id", getSingleFlower);
 router.post("/upload", addflower);

@@ -19,7 +19,7 @@ import Upload from "./components/Upload/Upload";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import EditFlower from "./components/Flower Edit/EditFlower";
 
-axios.defaults.baseURL = "http://localhost:8000/";
+axios.defaults.baseURL = `${import.meta.env.VITE_API_URL}`;
 axios.defaults.withCredentials = true;
 
 function App() {
