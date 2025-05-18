@@ -1,51 +1,51 @@
 const express = require("express");
+const path = require("path");
 const cookieParser = require("cookie-parser");
-const { mongoose } = require("mongoose");
-const dotenv = require("dotenv").config();
+const mongoose = require("mongoose");
 const cors = require("cors");
-
-mongoose
-   .connect(process.env.MONGO_URL)
-   .then(() => console.log("MongoDB connected"))
-   .catch((err) => console.error("MongoDB connection error:", err));
+require("dotenv").config();
 
 const app = express();
 
-// CORS configuration
-const allowedOrigins = [
-   "http://localhost:5173", // Local development
-   "https://your-client-deployment-url.vercel.app", // Update this with your client URL after deployment
-];
-
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(
    cors({
-      origin: function (origin, callback) {
-         // Allow requests with no origin (like mobile apps, curl requests)
-         if (!origin) return callback(null, true);
-
-         if (allowedOrigins.indexOf(origin) === -1) {
-            const msg =
-               "The CORS policy for this site does not allow access from the specified Origin.";
-            return callback(new Error(msg), false);
-         }
-         return callback(null, true);
-      },
+      origin: true,
       credentials: true,
    })
 );
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+// Add this before your other routes
+app.get("/", (req, res) => {
+   res.status(200).json({
+      message: "Flower Blog API is running",
+      endpoints: {
+         flowers: "/rtp/flowers/catalog",
+         users: "/rtp/users",
+         likes: "/rtp/likes",
+      },
+   });
+});
 
+// API routes - explicitly define these first
 app.use("/rtp/users", require("./routes/authRoutes"));
 app.use("/rtp/flowers", require("./routes/flowersRoutes"));
 app.use("/rtp/likes", require("./routes/likesRoutes"));
 
-// Handle OPTIONS method for preflight requests
-app.options("*", cors());
+// MongoDB connection
+mongoose
+   .connect(process.env.MONGO_URL || "mongodb://localhost:27017/rtp")
+   .then(() => console.log("MongoDB connected"))
+   .catch((err) => console.error("MongoDB connection error:", err));
 
-const port = process.env.PORT || 8000;
-app.listen(port, () => console.log(`Server is running on port ${port}`));
+if (process.env.NODE_ENV !== "production") {
+   // Start server in development
+   const port = process.env.PORT || 8000;
+   app.listen(port, () => console.log(`Server running on port ${port}`));
+}
 
-module.exports = app; // Export for Vercel
+// Export for Vercel serverless functions
+module.exports = app;
