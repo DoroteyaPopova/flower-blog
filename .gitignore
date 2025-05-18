@@ -13,7 +13,9 @@ server/node_modules/
 
 # Environment variables
 client/.env
+client/.env.*
 server/.env
+server/.env.*
 
 # Build output
 client/dist/
