@@ -41,11 +41,12 @@ mongoose
    .then(() => console.log("MongoDB connected"))
    .catch((err) => console.error("MongoDB connection error:", err));
 
-if (process.env.NODE_ENV !== "production") {
-   // Start server in development
-   const port = process.env.PORT || 8000;
-   app.listen(port, () => console.log(`Server running on port ${port}`));
-}
+const port = process.env.PORT || 8000;
+app.listen(port, () => {
+   console.log(
+      `Server running on port ${port} in ${process.env.NODE_ENV} mode`
+   );
+});
 
-// Export for Vercel serverless functions
+// Export for compatibility with serverless environments
 module.exports = app;
