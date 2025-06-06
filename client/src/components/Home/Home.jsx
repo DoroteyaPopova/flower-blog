@@ -36,7 +36,9 @@ export default function Home() {
       return (
          <div className={styles.body}>
             <div className={styles.container}>
-               <p>Loading top flowers...</p>
+               <p>
+                  Loading most liked flowers. This might take up to 1 minute.
+               </p>
             </div>
          </div>
       );
