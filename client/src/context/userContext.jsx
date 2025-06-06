@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createContext, useState, useEffect, useContext } from "react";
+import { tokenManager } from "../utils/tokenManager";
 
 export const UserContext = createContext({});
 
@@ -12,13 +13,16 @@ export function UserContextProvider({ children }) {
       const checkAuth = async () => {
          setIsLoading(true);
          try {
-            const storedToken = localStorage.getItem("authToken");
+            // Get token using token manager (includes expiry check)
+            const storedToken = tokenManager.getToken();
 
             if (storedToken) {
+               // Set the token in axios headers
                axios.defaults.headers.common[
                   "Authorization"
                ] = `Bearer ${storedToken}`;
 
+               // Verify token with server
                const { data } = await axios.get("/rtp/users/profile");
                const normalizedUser = {
                   ...data.user,
@@ -29,7 +33,7 @@ export function UserContextProvider({ children }) {
             }
          } catch (error) {
             console.error("Auth check failed:", error);
-            localStorage.removeItem("authToken");
+            tokenManager.clearToken();
             delete axios.defaults.headers.common["Authorization"];
             setUser(null);
             setToken(null);
@@ -49,15 +53,21 @@ export function UserContextProvider({ children }) {
       setUser(normalizedUser);
       setToken(authToken);
 
-      localStorage.setItem("authToken", authToken);
+      // Store token using token manager (includes expiry)
+      tokenManager.setToken(authToken);
 
+      // Set token in axios headers for future requests
       axios.defaults.headers.common["Authorization"] = `Bearer ${authToken}`;
    };
 
    const logout = () => {
       setUser(null);
       setToken(null);
-      localStorage.removeItem("authToken");
+
+      // Remove token using token manager
+      tokenManager.clearToken();
+
+      // Remove token from axios headers
       delete axios.defaults.headers.common["Authorization"];
    };
 
