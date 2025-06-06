@@ -9,6 +9,7 @@ A full-stack React application for flower enthusiasts to share their passion for
 -  [Tech Stack](#tech-stack)
 -  [Frontend Implementation](#frontend-implementation)
 -  [Backend Implementation](#backend-implementation)
+-  [Authentication Implementation](#authentication-implementation)
 -  [Installation](#installation)
 -  [Usage](#usage)
 -  [API Reference](#api-reference)
@@ -84,6 +85,44 @@ The backend is built with Node.js and Express.js, providing a RESTful API that c
 -  Authentication using JWT (JSON Web Tokens)
 -  Database operations with MongoDB
 -  Data validation and error handling
+
+## Authentication Implementation
+
+This project uses localStorage for JWT token storage due to cross-domain deployment constraints (client on Vercel, API on Render).
+
+### Implementation Details
+
+-  **Token Storage**: localStorage with automatic expiry validation
+-  **Security Features**:
+   -  Token expiry checking (7-day lifespan matching JWT)
+   -  Automatic cleanup of expired tokens
+   -  Centralized token management through utility functions
+   -  Authorization header-based API requests
+
+### Security Considerations
+
+**Current Approach:**
+
+-  Uses localStorage for cross-domain compatibility
+-  Implements token expiry validation
+-  Provides automatic cleanup mechanisms
+
+**Security Trade-offs:**
+
+-  Acknowledges XSS vulnerability considerations
+-  localStorage tokens persist until manually cleared or expired
+
+**Production Alternative:**
+For same-domain deployments, httpOnly cookies would be preferred for enhanced security against XSS attacks.
+
+### Token Manager Utility
+
+The application includes a professional token management system:
+
+-  Centralized localStorage operations
+-  Automatic expiry validation
+-  Clean token lifecycle management
+-  Separation of concerns from React components
 
 ## Installation
 
