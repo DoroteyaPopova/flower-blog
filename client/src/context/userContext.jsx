@@ -12,20 +12,25 @@ export function UserContextProvider({ children }) {
       const checkAuth = async () => {
          setIsLoading(true);
          try {
-            const storedAuth = localStorage.getItem("loggedIn");
+            const storedToken = localStorage.getItem("authToken");
 
-            if (storedAuth) {
+            if (storedToken) {
+               axios.defaults.headers.common[
+                  "Authorization"
+               ] = `Bearer ${storedToken}`;
+
                const { data } = await axios.get("/rtp/users/profile");
                const normalizedUser = {
                   ...data.user,
                   id: data.user.id || data.user._id,
                };
                setUser(normalizedUser);
-               setToken(data.token);
+               setToken(storedToken);
             }
          } catch (error) {
             console.error("Auth check failed:", error);
-            localStorage.removeItem("loggedIn");
+            localStorage.removeItem("authToken");
+            delete axios.defaults.headers.common["Authorization"];
             setUser(null);
             setToken(null);
          } finally {
@@ -43,12 +48,17 @@ export function UserContextProvider({ children }) {
       };
       setUser(normalizedUser);
       setToken(authToken);
-      localStorage.setItem("loggedIn", "true");
+
+      localStorage.setItem("authToken", authToken);
+
+      axios.defaults.headers.common["Authorization"] = `Bearer ${authToken}`;
    };
+
    const logout = () => {
       setUser(null);
       setToken(null);
-      localStorage.removeItem("loggedIn");
+      localStorage.removeItem("authToken");
+      delete axios.defaults.headers.common["Authorization"];
    };
 
    return (
