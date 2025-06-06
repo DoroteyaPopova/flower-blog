@@ -15,7 +15,7 @@ export const tokenManager = {
 
       if (!token || !expiry) return null;
 
-      // Check if token is expired
+      // Check if token expired
       if (Date.now() > parseInt(expiry)) {
          tokenManager.clearToken();
          return null;
