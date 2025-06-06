@@ -13,11 +13,6 @@ const {
 router.use(cookieParser());
 
 router.get("/logout", (req, res) => {
-   res.clearCookie("token", {
-      httpOnly: true,
-      sameSite: "none",
-      secure: true,
-   });
    res.status(200).json({ message: "Logged out successfully" });
 });
 

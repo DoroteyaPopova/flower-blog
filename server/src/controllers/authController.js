@@ -35,8 +35,16 @@ const registerUser = async (req, res) => {
             expiresIn: "1w",
          }
       );
-      res.cookie("token", token, { httpOnly: true });
-      res.status(201).json({ message: "User registered successfully", user });
+
+      res.status(201).json({
+         message: "User registered successfully",
+         user: {
+            id: user.id,
+            email: user.email,
+            username: user.username,
+         },
+         token,
+      });
    } catch (error) {
       res.status(400).json({ error: error.message });
    }
@@ -58,20 +66,30 @@ const loginUser = async (req, res) => {
             expiresIn: "1w",
          }
       );
-      res.cookie("token", token, { httpOnly: true });
-      res.status(200).json({ message: "Logged in successfully", user, token });
+
+      res.status(200).json({
+         message: "Logged in successfully",
+         user: {
+            id: user.id,
+            email: user.email,
+            username: user.username,
+         },
+         token,
+      });
    } catch (error) {
       res.status(400).json({ error: error.message });
    }
 };
 
 const getProfile = (req, res) => {
-   const { token } = req.cookies;
+   // Get token from Authorization header instead of cookies
+   const authHeader = req.headers.authorization;
+   const token = authHeader && authHeader.split(" ")[1]; // Bearer TOKEN
+
    if (token) {
       jwt.verify(token, process.env.JWT_Secret, async (err, decodedToken) => {
          if (err) {
-            res.clearCookie("token");
-            res.status(200).json({ error: "Unauthorized" });
+            res.status(401).json({ error: "Unauthorized" });
             return;
          } else {
             const data = await User.findById(decodedToken.userId);
@@ -84,7 +102,7 @@ const getProfile = (req, res) => {
          }
       });
    } else {
-      res.status(100);
+      res.status(401).json({ error: "No token provided" });
    }
 };
 

@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 const getAllFlowers = async (req, res) => {
    try {
       const flowers = await Flower.find({});
-      // const flowers = {}; //Test for no flowers
       res.status(200).json(flowers);
    } catch (error) {
       res.status(500).json({ message: error.message });
@@ -24,7 +23,14 @@ const getSingleFlower = async (req, res) => {
 
 const addflower = async (req, res) => {
    try {
-      const { token } = req.cookies;
+      // Get token from Authorization header instead of cookies
+      const authHeader = req.headers.authorization;
+      const token = authHeader && authHeader.split(" ")[1];
+
+      if (!token) {
+         return res.status(401).json({ error: "No token provided" });
+      }
+
       const decodedToken = jwt.verify(token, process.env.JWT_Secret);
       const userId = decodedToken.userId;
 
@@ -50,7 +56,6 @@ const addflower = async (req, res) => {
       res.status(201).json({ message: "Flower post created successfully" });
    } catch (error) {
       res.status(400).json({ error: error.message });
-      res.json({ error: error.message });
    }
 };
 
